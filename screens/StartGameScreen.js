@@ -15,19 +15,25 @@ function StartGameScreen() {
 				placeholderTextColor="#FFFFFF"
 				underlineColorAndroid={'transparent'}
 				maxLength={2}
+				keyboardType='number-pad'
+				autoCorrect={false}
 			/>
-			<PrimaryButton>Reset</PrimaryButton>
-			<PrimaryButton>Confirm</PrimaryButton>
+			<View style={styles.buttonsContainer}>
+				<View style={styles.buttonContainer}>
+					<PrimaryButton>Reset</PrimaryButton>
+				</View>
+				<View style={styles.buttonContainer}>
+					<PrimaryButton>Confirm</PrimaryButton>
+				</View>
+			</View>
 		</View>
 	);
 }
 
 const styles = StyleSheet.create({
 	inputContainer: {
-		backgroundColor: "#72063c",
-		justifyContent: "space-between",
+		backgroundColor: "#3b021f",
 		alignItems: "center",
-		height: "30%",
 		padding: 24,
 		marginTop: 100,
 		marginHorizontal: 24,
@@ -46,9 +52,19 @@ const styles = StyleSheet.create({
 		borderRadius: 12,
 		borderColor: "#ddb52f",
 		width: 100,
+		height: 60,
 		color: "#ddb52f",
 		marginVertical: 8,
 		textAlign: 'center',
+	},
+	buttonsContainer: {
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'center',
+
+	},
+	buttonContainer: {
+		flex: 1
 	}
 });
 
