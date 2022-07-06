@@ -6,7 +6,7 @@ import {
 	Platform
 } from 'react-native';
 
-function PrimaryButton({ children }) {
+function PrimaryButton({ children, btnOnTap }) {
 	return (
 		<View style={styles.buttonOuterContainer}>
 			<Pressable
@@ -17,6 +17,7 @@ function PrimaryButton({ children }) {
 					return styles.buttonInnerContainer;
 				}}
 				android_ripple={{ color: "#541333" }}
+				onPress={btnOnTap}
 			>
 				<Text style={styles.buttonText}>{children}</Text>
 			</Pressable>
