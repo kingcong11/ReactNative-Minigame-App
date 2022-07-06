@@ -5,8 +5,8 @@ import {
 	Alert,
 } from 'react-native';
 import { useState } from 'react';
-
 import PrimaryButton from '../components/PrimaryButton';
+import { Colors } from '../constants/values';
 
 function StartGameScreen({ onSuccessConfirmNumber }) {
 
@@ -90,10 +90,10 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 		borderWidth: 2,
 		borderRadius: 12,
-		borderColor: "#ddb52f",
+		borderColor: Colors.appForeground,
 		width: 100,
 		height: 60,
-		color: "#ddb52f",
+		color: Colors.appForeground,
 		marginVertical: 8,
 		textAlign: 'center',
 	},
