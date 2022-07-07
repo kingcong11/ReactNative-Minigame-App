@@ -6,16 +6,13 @@ import {
 	Platform,
 	Alert,
 } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Colors } from '../constants/values';
 
 /* Components */
 import BoxedTitle from '../components/BoxedTitle.js';
 import PrimaryButton from '../components/PrimaryButton.js';
 import OpponentGuessCard from '../components/game/OpponentGuessCard.js';
-
-
-
 
 
 /* Functions */
@@ -35,11 +32,17 @@ function generateRandomBetween(min, max, exclude) {
 let minBoundary = 1;
 let maxBoundary = 100;
 
-function GameScreen({ numberToGuess }) {
+function GameScreen({ numberToGuess, onSuccesfulGuess }) {
 
 	/* Hooks */
-	const initialGuess = generateRandomBetween(minBoundary, maxBoundary, numberToGuess);
+	const initialGuess = generateRandomBetween(1, 100, numberToGuess);
 	const [currentGuess, setCurrentGuess] = useState(initialGuess);
+
+	useEffect(() => {
+		if (currentGuess === numberToGuess) {
+			onSuccesfulGuess();
+		}
+	}, [currentGuess]);
 
 	/* Functions */
 	function nextGuess(direction) {
@@ -47,7 +50,6 @@ function GameScreen({ numberToGuess }) {
 		/*
 		||	DIRECTION -> ["HIGHER", "LOWER"]
 		*/
-
 
 		if ((direction === "LOWER" && currentGuess < numberToGuess) || (direction === "HIGHER" && currentGuess > numberToGuess)) {
 			/* Player mistakenly chosen the wrong direction or lying */
@@ -66,8 +68,6 @@ function GameScreen({ numberToGuess }) {
 			);
 			return;
 		}
-
-
 
 		console.log(`OPPONENT'S GUESS: ${currentGuess}`);
 		console.log(`CHOSEN DIRECTION: ${direction}`);

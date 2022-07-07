@@ -12,11 +12,13 @@ import { useState } from 'react';
 /* Screens */
 import StartGameScreen from './screens/StartGameScreen';
 import GameScreen from './screens/GameScreen';
+import GameOverScreen from './screens/GameOverScreen';
 
 export default function App() {
 
 	/* Hooks */
 	const [numberToGuess, setNumberToGuess] = useState(null);
+	const [gameIsOver, setGameIsOver] = useState(false);
 
 	/* Functions */
 	function confirmNumberToGuess(confirmedNumber) {
@@ -24,10 +26,22 @@ export default function App() {
 		console.log(`NUMBER TO GUESS: ${confirmedNumber}`);
 	}
 
+	function succesfulGuessHandler() {
+		setGameIsOver(true);
+	}
+
+
+
+
+	/* Screen Manager */
 	let screenToShow = <StartGameScreen onSuccessConfirmNumber={confirmNumberToGuess} />;
 
 	if (numberToGuess !== null) {
-		screenToShow = <GameScreen numberToGuess={numberToGuess} />;
+		screenToShow = <GameScreen numberToGuess={numberToGuess} onSuccesfulGuess={succesfulGuessHandler} />;
+	}
+
+	if (gameIsOver && numberToGuess !== null) {
+		screenToShow = <GameOverScreen />
 	}
 
 
