@@ -21,13 +21,13 @@ export default function App() {
 	/* Functions */
 	function confirmNumberToGuess(confirmedNumber) {
 		setNumberToGuess(confirmedNumber);
-		console.log(`value of number to guess: ${numberToGuess}`);
+		console.log(`NUMBER TO GUESS: ${confirmedNumber}`);
 	}
 
 	let screenToShow = <StartGameScreen onSuccessConfirmNumber={confirmNumberToGuess} />;
 
 	if (numberToGuess !== null) {
-		screenToShow = <GameScreen />;
+		screenToShow = <GameScreen numberToGuess={numberToGuess} />;
 	}
 
 

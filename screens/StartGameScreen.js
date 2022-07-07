@@ -18,8 +18,6 @@ function StartGameScreen({ onSuccessConfirmNumber }) {
 
 		const parsedNumber = parseInt(enteredNumber);
 		if ((parsedNumber > 0) && (parsedNumber < 100) && !isNaN(parsedNumber)) {
-			console.log(`NUMBER CONFIRMED: ${parsedNumber}`);
-
 			onSuccessConfirmNumber(parsedNumber);
 		} else {
 			console.log(`Invalid number submitted`);

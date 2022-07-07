@@ -4,6 +4,7 @@ module.exports = Object.freeze({
 		primary600: "#541333",
 		appBackground: "#4e0329",
 		appForeground: "#ddb52f",
+		white: "#FFFFFF",
 	},
 	Texts: {
 		greeting: "Hello Player! Welcome to this app!",
