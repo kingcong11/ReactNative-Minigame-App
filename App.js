@@ -27,14 +27,9 @@ export default function App() {
 		'open-sans-bold': require('./assets/fonts/OpenSans/OpenSans-Bold.ttf'),
 	};
 
-
-
 	/* Functions */
 
 	useEffect(() => {
-
-
-
 		initializeApp();
 		// return () => {}; //on disposefunction
 	}, []);

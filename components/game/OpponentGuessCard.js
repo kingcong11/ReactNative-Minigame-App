@@ -18,7 +18,9 @@ export default function OpponentGuessCard({ currentGuess, onChooseDirection }) {
 
 			<Row style={styles.btnsContainer}>
 				<View style={styles.btnContainer}>
-					<PrimaryButton btnOnTap={onChooseDirection.bind(this, "LOWER")}>Lower</PrimaryButton>
+					<PrimaryButton btnOnTap={onChooseDirection.bind(this, "LOWER")}>
+						<FontAwesome name='arrow-down' size={25} />
+					</PrimaryButton>
 				</View>
 				<View style={styles.btnContainer}>
 					<PrimaryButton btnOnTap={() => onChooseDirection("HIGHER")}>
