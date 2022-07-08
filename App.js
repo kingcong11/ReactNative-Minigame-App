@@ -22,6 +22,8 @@ export default function App() {
 	const [numberToGuess, setNumberToGuess] = useState(null);
 	const [gameIsOver, setGameIsOver] = useState(false);
 	const [appIsReady, setAppIsReady] = useState(false);
+	const [attemptsMade, setAttemptsMade] = useState(0);
+
 	const fontsToLoad = {
 		'open-sans-regular': require('./assets/fonts/OpenSans/OpenSans-Regular.ttf'),
 		'open-sans-bold': require('./assets/fonts/OpenSans/OpenSans-Bold.ttf'),
@@ -36,7 +38,7 @@ export default function App() {
 
 	async function initializeApp() {
 		try {
-			console.log(`INITIALIZING APPLICATION`);
+			// console.log(`INITIALIZING APPLICATION`);
 			await SplashScreen.preventAutoHideAsync();
 			await Fonts.loadAsync(fontsToLoad);
 		} catch (error) {
@@ -48,7 +50,7 @@ export default function App() {
 
 	const onLayoutRootView = useCallback(async () => {
 		if (appIsReady) {
-			console.log(`APPLICATION INITIALIZED`);
+			// console.log(`APPLICATION INITIALIZED`);
 			await SplashScreen.hideAsync();
 		}
 	}, [appIsReady]);
@@ -58,8 +60,15 @@ export default function App() {
 		console.log(`NUMBER TO GUESS: ${confirmedNumber}`);
 	}
 
-	function succesfulGuessHandler() {
+	function succesfulGuessHandler(totalAttemptsMade) {
 		setGameIsOver(true);
+		setAttemptsMade(totalAttemptsMade);
+	}
+
+	function restartGame() {
+		setNumberToGuess(null);
+		setGameIsOver(false);
+		setAttemptsMade(0);
 	}
 
 
@@ -76,7 +85,7 @@ export default function App() {
 	}
 
 	if (gameIsOver && numberToGuess !== null) {
-		screenToShow = <GameOverScreen />
+		screenToShow = <GameOverScreen onRestart={restartGame} numberToGuess={numberToGuess} attemptsMade={attemptsMade} />
 	}
 
 	/* ============================================================ */

@@ -15,7 +15,7 @@ import BoxedTitle from '../components/BoxedTitle';
 import PrimaryButton from '../components/PrimaryButton';
 
 
-export default function GameOverScreen() {
+export default function GameOverScreen({ numberToGuess, attemptsMade, onRestart }) {
 	return (
 		<Column style={styles.screen}>
 			<BoxedTitle title="Game Over!"></BoxedTitle>
@@ -27,12 +27,12 @@ export default function GameOverScreen() {
 			</View>
 			<Text style={styles.summaryText}>
 				The computer takes
-				<Text style={styles.highlightText}> N </Text>
+				<Text style={styles.highlightText}> {attemptsMade} </Text>
 				attempts to guess the number
-				<Text style={styles.highlightText}> Y</Text>
+				<Text style={styles.highlightText}> {numberToGuess}</Text>
 				.
 			</Text>
-			<PrimaryButton>Start New Game</PrimaryButton>
+			<PrimaryButton btnOnTap={onRestart}>Start New Game</PrimaryButton>
 		</Column >
 	);
 }
