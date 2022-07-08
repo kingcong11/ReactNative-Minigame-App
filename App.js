@@ -7,7 +7,9 @@ import {
 	StatusBar,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import * as Fonts from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
 
 /* Screens */
 import StartGameScreen from './screens/StartGameScreen';
@@ -19,8 +21,43 @@ export default function App() {
 	/* Hooks */
 	const [numberToGuess, setNumberToGuess] = useState(null);
 	const [gameIsOver, setGameIsOver] = useState(false);
+	const [appIsReady, setAppIsReady] = useState(false);
+	const fontsToLoad = {
+		'open-sans-regular': require('./assets/fonts/OpenSans/OpenSans-Regular.ttf'),
+		'open-sans-bold': require('./assets/fonts/OpenSans/OpenSans-Bold.ttf'),
+	};
+
+
 
 	/* Functions */
+
+	useEffect(() => {
+
+
+
+		initializeApp();
+		// return () => {}; //on disposefunction
+	}, []);
+
+	async function initializeApp() {
+		try {
+			console.log(`INITIALIZING APPLICATION`);
+			await SplashScreen.preventAutoHideAsync();
+			await Fonts.loadAsync(fontsToLoad);
+		} catch (error) {
+			console.warn(error);
+		} finally {
+			setAppIsReady(true);
+		}
+	}
+
+	const onLayoutRootView = useCallback(async () => {
+		if (appIsReady) {
+			console.log(`APPLICATION INITIALIZED`);
+			await SplashScreen.hideAsync();
+		}
+	}, [appIsReady]);
+
 	function confirmNumberToGuess(confirmedNumber) {
 		setNumberToGuess(confirmedNumber);
 		console.log(`NUMBER TO GUESS: ${confirmedNumber}`);
@@ -31,9 +68,12 @@ export default function App() {
 	}
 
 
-
-
 	/* Screen Manager */
+
+	if (!appIsReady) {
+		return null;
+	}
+
 	let screenToShow = <StartGameScreen onSuccessConfirmNumber={confirmNumberToGuess} />;
 
 	if (numberToGuess !== null) {
@@ -44,9 +84,11 @@ export default function App() {
 		screenToShow = <GameOverScreen />
 	}
 
+	/* ============================================================ */
+
 
 	return (
-		<LinearGradient colors={["#4e0329", "#ddb52f",]} style={styles.rootScreen}>
+		<LinearGradient colors={["#4e0329", "#ddb52f",]} style={styles.rootScreen} onLayout={onLayoutRootView}>
 			<ExpoStatusBar style='light' />
 			<ImageBackground
 				source={require('./assets/images/background.png')}
