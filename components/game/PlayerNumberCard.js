@@ -43,7 +43,7 @@ export default function PlayerNumberCard({ onSuccessConfirmNumber }) {
 
 	return (
 		<View style={styles.inputContainer}>
-			<Text style={styles.subHeading}>Enter a freakin number</Text>
+			<Text style={styles.subHeading}>Enter a number</Text>
 			<TextInput
 				placeholder='0'
 				value={enteredNumber.toString()}
