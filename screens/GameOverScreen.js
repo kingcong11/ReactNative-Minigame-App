@@ -109,7 +109,6 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 24,
 		marginTop: (Platform.OS == 'android') ? StatusBar.currentHeight : 0,
 		paddingTop: 50,
-		backgroundColor: Colors.white
 	},
 	imageContainer: {
 		// height: (Dimens.deviceWindowWidth <= Dimens.smallDeviceWidthBreakpoint) ? 260 : 340,
