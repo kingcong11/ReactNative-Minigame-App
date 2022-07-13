@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { Colors } from '../../constants/values';
 import { FontAwesome } from '@expo/vector-icons/';
 
@@ -32,11 +32,13 @@ export default function OpponentGuessCard({ currentGuess, onChooseDirection }) {
 	);
 }
 
+const deviceWindowSize = Dimensions.get('window');
+
 const styles = StyleSheet.create({
 	containerOne: {
 		alignItems: "center",
 		backgroundColor: 'rgba(78, 3, 41, 0.5)',
-		paddingVertical: 10,
+		paddingVertical: 20,
 		marginTop: 10,
 		borderRadius: 25,
 		elevation: 3,
@@ -46,7 +48,7 @@ const styles = StyleSheet.create({
 		shadowOpacity: .25,
 	},
 	subHeading: {
-		fontSize: 16,
+		fontSize: 20,
 		fontWeight: "bold",
 		color: Colors.appForeground,
 		marginVertical: 10,
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
 		padding: 10,
 		color: Colors.white,
 		fontWeight: "bold",
-		fontSize: 55,
+		fontSize: deviceWindowSize.width < 370 ? 45 : 55,
 		textAlign: "center",
 	},
 	btnsContainer: {

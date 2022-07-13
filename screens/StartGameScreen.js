@@ -1,14 +1,14 @@
 import {
-	TextInput,
 	View,
 	StyleSheet,
-	Alert,
 	Platform,
 	StatusBar,
+	useWindowDimensions,
+	KeyboardAvoidingView,
+	ScrollView,
 	Text
 } from 'react-native';
-import { useState } from 'react';
-import { Colors } from '../constants/values';
+import { Colors, Dimens } from '../constants/values';
 
 /* Components */
 import PlayerNumberCard from '../components/game/PlayerNumberCard';
@@ -16,13 +16,24 @@ import BoxedTitle from '../components/BoxedTitle';
 
 function StartGameScreen({ onSuccessConfirmNumber }) {
 
+	const { width, height } = useWindowDimensions();
+
+	// if the device is in landscape mode, the original device width becomes the hight so we compare it to the current height
+	const paddingTopByOrientation = (height <= Dimens.smallDeviceWidthBreakpoint) ? 10 : 50;
+
 	return (
-		<View style={styles.screen}>
-			<BoxedTitle title="Guess my Number"></BoxedTitle>
-			<PlayerNumberCard onSuccessConfirmNumber={onSuccessConfirmNumber} />
-		</View>
+		<ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+			<KeyboardAvoidingView style={styles.flex} behavior="padding">
+				< View style={[styles.screen, { paddingTop: paddingTopByOrientation }]} >
+					<BoxedTitle title="Guess my Number"></BoxedTitle>
+					<PlayerNumberCard onSuccessConfirmNumber={onSuccessConfirmNumber} />
+				</View >
+			</KeyboardAvoidingView>
+		</ ScrollView>
 	);
 }
+
+
 
 const styles = StyleSheet.create({
 	screen: {
@@ -32,7 +43,10 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		paddingHorizontal: 24,
 		marginTop: (Platform.OS == 'android') ? StatusBar.currentHeight : 0,
-		paddingTop: 30
+		paddingTop: 80,
+	},
+	flex: {
+		flex: 1,
 	},
 
 });
